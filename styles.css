@@ -17,15 +17,40 @@ body{
 }
 h1{
   font-size: 4rem;
+  margin-bottom: 2rem;
+}
+.score-block{
+  width: 50%;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-bottom: 2.5rem;
+  display: none;
+}
+.score-block.active{
+  display: flex;
 }
 .who-won{
-  font-size:3rem;
-  margin-bottom: 2rem;
+  font-size:2rem;
   color: blue;
 }
+.restart-btn{
+  display: inline-block;
+  background-color: transparent;
+  padding: 0.8rem 1.1rem;
+  border: 1px solid white;
+  color: white;
+  font-size: 1.3rem;
+  text-decoration: none;
+  transition: 0.5s all ease;
+}
+.restart-btn:hover{
+  color:rgb(116, 162, 202);
+  background-color: white;
+  border: none;
+}
 .t-container{
-  width: 50%;
-  height: 300px;
+  width: 40%;
+  height: 250px;
   background-color: rgb(116, 162, 202);
   display: flex;
   flex-wrap: wrap;

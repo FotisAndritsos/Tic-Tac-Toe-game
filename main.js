@@ -1,8 +1,11 @@
 const tBlocks = document.querySelectorAll(".t-blocks");
 const whoWon = document.querySelector(".who-won");
+const scoreBlock = document.querySelector(".score-block");
+const restartBtn = document.querySelector(".restart-btn");
 
 
 
+let xPlayer = true;
 const xNiaou = "niaou";
 const oGav = "gav";
 const winPositions = [
@@ -16,7 +19,12 @@ const winPositions = [
   [2, 4, 6],
 ];
 
-let xPlayer = true;
+
+const gameStart = () => {
+   tBlocks.forEach((block) => {
+    block.addEventListener("click", handleClick, { once: true });
+  });
+};
 
 const handleClick = (e) => {{
     const cell = e.target;
@@ -49,11 +57,13 @@ const getWinner = (currentClass) => {
 
 const endGame = (currentClass) => {
   if (currentClass === xNiaou) {
+    scoreBlock.classList.add("active");
    whoWon.innerHTML = "X Player WINS!!!"
    tBlocks.forEach((block) => {
-     block.removeEventListener("click", handleClick, { once: true });
+    block.removeEventListener("click", handleClick, { once: true });
    });
   } else {
+    scoreBlock.classList.add("active");
     whoWon.innerHTML = "O Player WINS!!!";
     tBlocks.forEach((block) => {
       block.removeEventListener("click", handleClick, { once: true });
@@ -61,6 +71,15 @@ const endGame = (currentClass) => {
   }
 };
 
-tBlocks.forEach((block) => {
-  block.addEventListener("click", handleClick, { once: true });
+
+
+
+restartBtn.addEventListener("click", (currentClass) => {
+  scoreBlock.classList.remove("active");
+  tBlocks.forEach((block) => {
+    block.classList.remove("niaou","gav");
+  });
+  gameStart();
 });
+
+gameStart();
