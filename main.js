@@ -1,4 +1,8 @@
 const tBlocks = document.querySelectorAll(".t-blocks");
+const whoWon = document.querySelector(".who-won");
+
+
+
 const xNiaou = "niaou";
 const oGav = "gav";
 const winPositions = [
@@ -18,9 +22,15 @@ const handleClick = (e) => {{
     const cell = e.target;
     const currentClass = xPlayer ? xNiaou : oGav;
     placeMark(cell, currentClass);
+    if (getWinner(currentClass)){
+      endGame(currentClass);
+    } else{
+      console.log("try againnnnn!!")
+    }
     tTurn();
   }
 };
+
 const tTurn = () => {
   xPlayer = !xPlayer;
 };
@@ -29,9 +39,28 @@ const placeMark = (cell, currentClass) =>{
   cell.classList.add(currentClass);
 }
 
+const getWinner = (currentClass) => {
+  return winPositions.some( pos => {
+    return pos.every(index => {
+      return tBlocks[index].classList.contains(currentClass);
+    });
+  });
+};
+
+const endGame = (currentClass) => {
+  if (currentClass === xNiaou) {
+   whoWon.innerHTML = "X Player WINS!!!"
+   tBlocks.forEach((block) => {
+     block.removeEventListener("click", handleClick, { once: true });
+   });
+  } else {
+    whoWon.innerHTML = "O Player WINS!!!";
+    tBlocks.forEach((block) => {
+      block.removeEventListener("click", handleClick, { once: true });
+    });
+  }
+};
+
 tBlocks.forEach((block) => {
   block.addEventListener("click", handleClick, { once: true });
 });
-const getWinner = () => {
-
-}
