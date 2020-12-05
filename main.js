@@ -1,3 +1,6 @@
+
+// GSAP 
+
 gsap.to("h1", { duration: 3, text: "Tic Tac Toe" });
 
 const anim = () => {
@@ -28,18 +31,18 @@ const anim = () => {
   );
 };
 
-anim();
+
 
 const tBlocks = document.querySelectorAll(".t-blocks");
 const whoWon = document.querySelector(".who-won");
 const scoreBlock = document.querySelector(".score-block");
 const restartBtn = document.querySelector(".restart-btn");
 
-let numTurns = 0;
-let xPlayer = true;
-const xNiaou = "niaou";
-const oGav = "gav";
-const winPositions = [
+let numTurns = 0; //number of time both players heave played
+let xPlayer = true;// we gonna start the game with X player
+const xNiaou = "niaou";//the class for X player
+const oGav = "gav";//the class for O player
+const winPositions = [ //the possible winning combinations 
   [0, 1, 2],
   [3, 4, 5],
   [6, 7, 8],
@@ -50,12 +53,14 @@ const winPositions = [
   [2, 4, 6],
 ];
 
+// START GAME FUNCTION 
 const gameStart = () => {
   tBlocks.forEach((block) => {
     block.addEventListener("click", handleClick, { once: true });
   });
 };
 
+// THE FUNCTION WHEN A PLAYER CLICKS 
 const handleClick = (e) => {
   numTurns++;
 
@@ -72,9 +77,12 @@ const handleClick = (e) => {
   tTurn();
 };
 
+// FUNCTION CHANGING THE PLAYER'S TURN 
 const tTurn = () => {
   xPlayer = !xPlayer;
 };
+
+// ENDS GAME WITH A DRAW 
 const draw = () => {
   scoreBlock.classList.add("active");
   whoWon.innerHTML = "It's a Draw!!!";
@@ -83,10 +91,12 @@ const draw = () => {
   });
 };
 
+// FUNCTION DISPLAYING X OR O (DEPENDING THE CLASS-PLAYER)
 const placeMark = (cell, currentClass) => {
   cell.classList.add(currentClass);
 };
 
+//CHECKS IF THERE IS A WINNING COMBINATION AND WHICH PLAYER HAS IT(DEPENDING THE CLASS-PLAYER)
 const getWinner = (currentClass) => {
   return winPositions.some((pos) => {
     return pos.every((index) => {
@@ -95,6 +105,7 @@ const getWinner = (currentClass) => {
   });
 };
 
+//ENDS GAME WITH A WINNER AND DISPLAYING 
 const endGame = (currentClass) => {
   if (currentClass === xNiaou) {
     scoreBlock.classList.add("active");
@@ -111,6 +122,7 @@ const endGame = (currentClass) => {
   }
 };
 
+// RESTARTS THE GAME/RESETS 
 restartBtn.addEventListener("click", () => {
   scoreBlock.classList.remove("active");
   tBlocks.forEach((block) => {
@@ -120,4 +132,8 @@ restartBtn.addEventListener("click", () => {
   gameStart();
 });
 
+//GAME STARTS
 gameStart();
+
+// ANIMATION STARTS 
+anim();
