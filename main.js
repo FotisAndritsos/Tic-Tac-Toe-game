@@ -1,3 +1,35 @@
+gsap.to("h1", { duration: 3, text: "Tic Tac Toe" });
+
+const anim = () => {
+  const tl = gsap.timeline();
+  tl.from(
+    ".t-blocks:nth-child(1),.t-blocks:nth-child(4),.t-blocks:nth-child(7)",
+    {
+      opacity: 0,
+      y: 400,
+      duration: 0.5,
+    }
+  );
+  tl.from(
+    ".t-blocks:nth-child(2),.t-blocks:nth-child(5),.t-blocks:nth-child(8)",
+    {
+      opacity: 0,
+      y: -400,
+      duration: 0.5,
+    }
+  );
+  tl.from(
+    ".t-blocks:nth-child(3),.t-blocks:nth-child(6),.t-blocks:nth-child(9)",
+    {
+      opacity: 0,
+      y: 400,
+      duration: 0.5,
+    }
+  );
+};
+
+anim();
+
 const tBlocks = document.querySelectorAll(".t-blocks");
 const whoWon = document.querySelector(".who-won");
 const scoreBlock = document.querySelector(".score-block");
@@ -26,14 +58,13 @@ const gameStart = () => {
 
 const handleClick = (e) => {
   numTurns++;
-  console.log(numTurns);
 
   const cell = e.target;
   const currentClass = xPlayer ? xNiaou : oGav;
   placeMark(cell, currentClass);
   if (getWinner(currentClass)) {
     endGame(currentClass);
-    numTurns=0;
+    numTurns = 0;
   } else if (!getWinner(currentClass) && numTurns == 9) {
     draw();
     numTurns = 0;
@@ -85,6 +116,7 @@ restartBtn.addEventListener("click", () => {
   tBlocks.forEach((block) => {
     block.classList.remove("niaou", "gav");
   });
+  anim();
   gameStart();
 });
 
